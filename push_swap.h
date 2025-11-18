@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:16:44 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/17 15:21:41 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/18 10:47:06 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 typedef struct s_stack
 {
 	int content;
-	t_stack next;
+	struct s_stack *next;
 }	t_stack;
 
 
