@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/18 13:44:58 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/18 19:16:04 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,38 @@
 #include <unistd.h>
 
 
-int ft_atoi(char *argv)
+int ft_atoi(char *argv, int *tmp)
 {
 	int	i;
+	long number;
 	int sign;
-	int	number;
 
 	i = 0;
 	number = 0;
 	sign = 1;
-	if (argv[0] == '-')
+	if (argv[0] == '-' || argv[0] == '+')
 	{
-		sign = -1;
+		if (argv[0] == '-')
+			sign = -1;
 		i++;
 	}
-	else if (argv[0] == '+')
-		i++;
+	if (!argv[i])
+		return (1);
 	while (argv[i])
 	{
-		if (number > INT_MAX / 10 || (argv[i] < '0' || argv[i] > '9'))
-			return (123); ////////////////////////////////////////////////////////////////////// a ;odifie
+		if (argv[i] < '0' || argv[i] > '9')
+			return (1);
 		number *= 10;
 		number += argv[i] - '0';
+		if (number > 2147483648)
+			return (1);
 		i++;
 	}
 	number *= sign;
-	return (number);
+	if (number > 2147483647 || number < -2147483648)
+		return (1);
+	*tmp = (int)number;
+	return (0);
 }
 
 int	ft_create_end_node(t_stack **first_node, int content)
@@ -62,16 +68,17 @@ int	ft_create_end_node(t_stack **first_node, int content)
 	if (*first_node == NULL) // ok avec printf
 	{
 		*first_node = new_node;
-		new_node->next = NULL;
-		return (0);
+		new_node->next = *first_node;
+		new_node->prev = *first_node;
 	}
-	
-	node = *first_node;
-	
-	while (node->next != NULL && node->next != *first_node)
-	 	node = node->next;
-	node->next = new_node;
-	new_node->next = *first_node;
+	else
+	{
+		node = (*first_node)->prev;
+		node->next = new_node;
+		new_node->prev = node;
+		new_node->next = *first_node;
+		(*first_node)->prev = new_node;
+	}
 	return (0);
 }
 
@@ -84,8 +91,7 @@ int	ft_init_stack(char **argv, t_stack **stack_a)
 	tmp = 0;
 	while (argv[i])
 	{
-		tmp = ft_atoi(argv[i]); ////gestion erreur
-		if (tmp == 123)
+		if (ft_atoi(argv[i], &tmp)) ////gestion erreur
 			return (1);
 			
 		//verifier si duplicata
@@ -102,11 +108,8 @@ t_stack	**ft_create_stack(t_stack **stack)
 {
 	stack = malloc(sizeof(t_stack *));
 	if (!stack)
-	{
-		write(2, "Error\n", 6);
 		return (NULL);
-	}
-	stack = NULL;
+	*stack = NULL;
 	return (stack);
 }
 
@@ -125,6 +128,11 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	stack_a = ft_create_stack(stack_a);
 	stack_b = ft_create_stack(stack_b);
+	if (!stack_a || !stack_b)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
 	///////////////////////////////////////////////////////////////
 
 
@@ -138,17 +146,21 @@ int	main(int argc, char **argv)
 	}
 
 	//////////////////////// test stack_a/////////////////////////// 
-	// t_stack *test_first;
-	// test_first = *stack_a;
+	t_stack *test_first;
+	test_first = *stack_a;
 	
-	// printf("first node: %p, node: %p, content: %d, next: %p\n", *stack_a, test_first, test_first->content, test_first->next);
-	// while (test_first->next != NULL && test_first->next != *stack_a)
-	// {
-	// 	test_first = test_first->next;
-	// 	printf("first node: %p, node: %p, content: %d, next: %p\n", *stack_a, test_first, test_first->content, test_first->next);
-	// }
+	printf("first node: %10p\t node: %10p\t content: %10d\t next: %10p\t previous: %10p\n", *stack_a, test_first, test_first->content, test_first->next, test_first->prev);
+	while (test_first->next != *stack_a)
+	{
+		test_first = test_first->next;
+		printf("first node: %10p\t node: %10p\t content: %10d\t next: %10p\t previous: %10p\n", *stack_a, test_first, test_first->content, test_first->next, test_first->prev);
+	}
 	//////////////////////////////////////////////////////////////////////
 
+
+	//indexation 
+
+	//fonction du sujet
 
 	//en binaire si 0 stack a / si 1 stack b
 
