@@ -6,112 +6,16 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/18 19:16:04 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/19 12:57:40 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
 #include "push_swap.h"
-#include <limits.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 
-int ft_atoi(char *argv, int *tmp)
-{
-	int	i;
-	long number;
-	int sign;
 
-	i = 0;
-	number = 0;
-	sign = 1;
-	if (argv[0] == '-' || argv[0] == '+')
-	{
-		if (argv[0] == '-')
-			sign = -1;
-		i++;
-	}
-	if (!argv[i])
-		return (1);
-	while (argv[i])
-	{
-		if (argv[i] < '0' || argv[i] > '9')
-			return (1);
-		number *= 10;
-		number += argv[i] - '0';
-		if (number > 2147483648)
-			return (1);
-		i++;
-	}
-	number *= sign;
-	if (number > 2147483647 || number < -2147483648)
-		return (1);
-	*tmp = (int)number;
-	return (0);
-}
-
-int	ft_create_end_node(t_stack **first_node, int content)
-{
-	t_stack	*new_node;
-	t_stack *node;
-
-
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		return (1);
-
-	new_node->content = content;
-		
-	
-	if (*first_node == NULL) // ok avec printf
-	{
-		*first_node = new_node;
-		new_node->next = *first_node;
-		new_node->prev = *first_node;
-	}
-	else
-	{
-		node = (*first_node)->prev;
-		node->next = new_node;
-		new_node->prev = node;
-		new_node->next = *first_node;
-		(*first_node)->prev = new_node;
-	}
-	return (0);
-}
-
-int	ft_init_stack(char **argv, t_stack **stack_a)
-{
-	int	i;
-	int	tmp;
-
-	i = 0;
-	tmp = 0;
-	while (argv[i])
-	{
-		if (ft_atoi(argv[i], &tmp)) ////gestion erreur
-			return (1);
-			
-		//verifier si duplicata
-		
-		if (ft_create_end_node(stack_a, tmp))
-			return (1);
-			
-		i++;
-	}
-	return (0);
-}
-
-t_stack	**ft_create_stack(t_stack **stack)
-{
-	stack = malloc(sizeof(t_stack *));
-	if (!stack)
-		return (NULL);
-	*stack = NULL;
-	return (stack);
-}
 
 
 int	main(int argc, char **argv)
@@ -138,29 +42,70 @@ int	main(int argc, char **argv)
 
 
 	
-	//creation liste chainee avec les arguments et gestions d'erreur
+	//creation liste chainee avec les arguments et gestions d'erreur + retourne nbr arg
+	
 	if (ft_init_stack(&argv[1], stack_a))
 	{
 		write(2, "Error\n", 6);
 		return (1);
 	}
-
-	//////////////////////// test stack_a/////////////////////////// 
-	t_stack *test_first;
-	test_first = *stack_a;
 	
-	printf("first node: %10p\t node: %10p\t content: %10d\t next: %10p\t previous: %10p\n", *stack_a, test_first, test_first->content, test_first->next, test_first->prev);
-	while (test_first->next != *stack_a)
+	ft_search_index(stack_a); //ajouter verif duplicata
+
+	//////////////////////// test stack_a && stack_b/////////////////////////// 
+	t_stack *test;
+	
+	test = *stack_a;
+	printf("\n\nstack_a\n");
+	while (test)
 	{
-		test_first = test_first->next;
-		printf("first node: %10p\t node: %10p\t content: %10d\t next: %10p\t previous: %10p\n", *stack_a, test_first, test_first->content, test_first->next, test_first->prev);
+		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+		test = test->next;
+		if (test == *stack_a)
+			break;
+	}
+
+	test = *stack_b;
+	printf("\nstack_b\n\n");
+	while (test)
+	{
+		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+		test = test->next;
+		if (test == *stack_a)
+			break;
 	}
 	//////////////////////////////////////////////////////////////////////
 
 
-	//indexation 
-
 	//fonction du sujet
+	
+
+
+
+
+
+	//////////////////////// test stack_a && stack_b/////////////////////////// 
+	
+	test = *stack_a;
+	printf("\n\nstack_a\n");
+	while (test)
+	{
+		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+		test = test->next;
+		if (test == *stack_a)
+			break;
+	}
+
+	test = *stack_b;
+	printf("\nstack_b\n\n");
+	while (test)
+	{
+		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+		test = test->next;
+		if (test == *stack_a)
+			break;
+	}
+	//////////////////////////////////////////////////////////////////////
 
 	//en binaire si 0 stack a / si 1 stack b
 
