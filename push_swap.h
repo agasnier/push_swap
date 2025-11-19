@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:16:44 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 12:54:44 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:18:46 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	ft_search_index(t_stack **stack);
 //ft_helper.c
 int		ft_atoi(char *argv, int *tmp);
 int		ft_count_arg(t_stack **stack);
+
+//ft_operation.c
+void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op);
 
 
 #endif

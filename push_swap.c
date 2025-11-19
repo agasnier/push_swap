@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 12:57:40 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:35:28 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,18 @@ int	main(int argc, char **argv)
 	{
 		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
 		test = test->next;
-		if (test == *stack_a)
+		if (test == *stack_b)
 			break;
 	}
 	//////////////////////////////////////////////////////////////////////
 
 
 	//fonction du sujet
-	
+	ft_operation(stack_a, stack_b, "pb");
+	ft_operation(stack_a, stack_b, "pb");
 
+	ft_operation(stack_a, stack_b, "pb");
+	ft_operation(stack_a, stack_b, "rrb");
 
 
 
@@ -102,7 +105,7 @@ int	main(int argc, char **argv)
 	{
 		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
 		test = test->next;
-		if (test == *stack_a)
+		if (test == *stack_b)
 			break;
 	}
 	//////////////////////////////////////////////////////////////////////

@@ -1,3 +1,4 @@
 *.pdf
 *.gch
 *.out
+.vscode

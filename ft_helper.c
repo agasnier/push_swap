@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 12:52:30 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:59:17 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_count_arg(t_stack **stack)
 	t_stack *tmp;
 	int	count;
 	
+	if (!stack || !*stack)
+		return (-1);
 	tmp = *stack;
 	count = 0;
 	while (stack)
