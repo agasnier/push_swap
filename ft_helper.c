@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 14:59:17 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:17:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int	ft_count_arg(t_stack **stack)
 	int	count;
 	
 	if (!stack || !*stack)
-		return (-1);
+		return (0);
 	tmp = *stack;
 	count = 0;
-	while (stack)
+	while (1)
 	{
 		count++;
 		tmp = tmp->next;
 		if (tmp == *stack)
-			return (count);
+			break;
 	}
 
-	return (-1);
+	return (count);
 }
 
 int ft_atoi(char *argv, int *tmp)

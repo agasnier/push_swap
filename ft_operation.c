@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:04:26 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 15:36:49 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:40:32 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,23 @@ void ft_swap(t_stack **stack)
 void ft_push(t_stack **receiver, t_stack **sender)
 {
 	t_stack *node;
+
+	if (!sender || !*sender)
+        return;
 	
 	node = *sender;
-	(*sender) = (*sender)->next;
-	(*sender)->prev = node->prev;
-	node->prev->next = *sender;
+	if (node->next == node)
+		*sender = NULL;
+	else
+	{
+		*sender = (*sender)->next;
+		(*sender)->prev = node->prev;
+		node->prev->next = *sender;
+	}
 
 	if (!*receiver)
 	{
+		*receiver = node;
 		node->next = node;
 		node->prev =node;
 	}
@@ -50,11 +59,8 @@ void ft_push(t_stack **receiver, t_stack **sender)
 		node->next = *receiver;
 		(*receiver)->prev->next = node;
 		(*receiver)->prev = node;
+		*receiver = node;
 	}
-	*receiver = node;
-	
-	
-	
 }
 
 void ft_rotate(t_stack **stack, int reverse)
