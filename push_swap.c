@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/19 15:35:28 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/20 10:31:30 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int	main(int argc, char **argv)
 	
 	ft_search_index(stack_a); //ajouter verif duplicata
 
+
+
+	
 	//////////////////////// test stack_a && stack_b/////////////////////////// 
 	t_stack *test;
 	
@@ -75,16 +78,8 @@ int	main(int argc, char **argv)
 			break;
 	}
 	//////////////////////////////////////////////////////////////////////
-
-
-	//fonction du sujet
-	ft_operation(stack_a, stack_b, "pb");
-	ft_operation(stack_a, stack_b, "pb");
-
-	ft_operation(stack_a, stack_b, "pb");
-	ft_operation(stack_a, stack_b, "rrb");
-
-
+	printf("verify sorting: %d", ft_verify_sorting(stack_a));
+	
 
 
 	//////////////////////// test stack_a && stack_b/////////////////////////// 
@@ -110,7 +105,6 @@ int	main(int argc, char **argv)
 	}
 	//////////////////////////////////////////////////////////////////////
 
-	//en binaire si 0 stack a / si 1 stack b
 
 	
 
