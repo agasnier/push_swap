@@ -6,13 +6,13 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:26:39 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 15:51:34 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:15:34 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_search_index(t_stack *stack) //ajouter verif duplicata
+void	ft_search_index(t_stack **stack) //ajouter verif duplicata
 {
 	t_stack *node;
 	t_stack	*node_tmp;
@@ -20,11 +20,11 @@ void	ft_search_index(t_stack *stack) //ajouter verif duplicata
 	int index;
 	
 	index = 0;
-	count_arg = ft_count_arg(stack);
+	count_arg = ft_count_arg(*stack);
 	
 	while (index <= count_arg)
 	{
-		node = stack;
+		node = *stack;
 		node_tmp = NULL;
 		while (1)
 		{
@@ -32,7 +32,7 @@ void	ft_search_index(t_stack *stack) //ajouter verif duplicata
 				if (node_tmp == NULL || node_tmp->content > node->content)
 					node_tmp = node;	
 			node = node->next;
-			if (node == stack)
+			if (node == *stack)
 				break;
 		}
 		if (node_tmp != NULL)
@@ -41,18 +41,18 @@ void	ft_search_index(t_stack *stack) //ajouter verif duplicata
 	}
 }
 
-int	ft_verify_sorting(t_stack *stack)
+int	ft_verify_sorting(t_stack **stack)
 {
 	t_stack *node;
 																																																								
-	node = stack;
+	node = *stack;
 	
 	while (1)
 	{
 		if (node->content > node->next->content)
 			return (-1);
 		node = node->next;
-		if (node->next == stack)
+		if (node->next == *stack)
 			break;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 15:48:14 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:19:59 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,28 @@ int ft_atoi(char *argv, int *j, int *tmp)
 	return (0);
 }
 
-void	ft_free_all(t_stack *stack_a, t_stack *stack_b)
+void	ft_free_all(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack *tmp;
 	t_stack *head;
 
-	head = stack_a;
-	while (stack_a)
+	head = *stack_a;
+	while (*stack_a)
 	{
-		tmp = (stack_a)->next;
-		free(stack_a);
+		tmp = (*stack_a)->next;
+		free(*stack_a);
 		if (tmp == head)
 			break;
-		stack_a = tmp;
+		*stack_a = tmp;
 	}
-	head = stack_b;
-	while (stack_b)
+	head = *stack_b;
+	while (*stack_b)
 	{
-		tmp = (stack_b)->next;
-		free(stack_b);
+		tmp = (*stack_b)->next;
+		free(*stack_b);
 		if (tmp == head)
 			break;
-		stack_b = tmp;
+		*stack_b = tmp;
 	}
 	stack_a = NULL;
 	stack_b = NULL;

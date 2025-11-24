@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 15:58:02 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:22:56 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	
-	if (ft_init_stack(&argv[1], stack_a))
+	if (ft_init_stack(&argv[1], &stack_a))
 	{
 		write(2, "Error\n", 6);
 		return (1);
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 
 	printf("count arg \n");
 	
-	ft_search_index(stack_a); //ajouter verif duplicata
+	ft_search_index(&stack_a); //ajouter verif duplicata
 	
 	int arg_total;
 	int arg_in_a;
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	pos_bit = 0;
 	while (pos_bit < max_bit)
 	{		
-		if (!ft_verify_sorting(stack_a))
+		if (!ft_verify_sorting(&stack_a))
 			break;
 			
 		arg_in_a = ft_count_arg(stack_a);
@@ -83,12 +83,12 @@ int	main(int argc, char **argv)
 			node_a = stack_a;
 			if (node_a->index & (1 << pos_bit))
 			{
-				ft_operation(stack_a, stack_b, "ra");
+				ft_operation(&stack_a, &stack_b, "ra");
 				write(1, "ra\n", 3);
 			}
 			else
 			{
-				ft_operation(stack_a, stack_b, "pb");
+				ft_operation(&stack_a, &stack_b, "pb");
 				write(1, "pb\n", 3);
 			}
 			arg_in_a--;
@@ -104,16 +104,16 @@ int	main(int argc, char **argv)
 
 		while (stack_b)
 		{
-			ft_operation(stack_a, stack_b, "pa");
+			ft_operation(&stack_a, &stack_b, "pa");
 			write(1, "pa\n", 3);
 		}
 		pos_bit++;
 	}
 
-	// printf("\n\n\n stack_a final\n");
-	// print_s(&stack_a);
+	printf("\n\n\n stack_a final\n");
+	print_s(&stack_a);
 
-	ft_free_all(stack_a, stack_b);
+	ft_free_all(&stack_a, &stack_b);
 
 
 
