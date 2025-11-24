@@ -6,19 +6,19 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:04:26 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 11:02:02 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:50:39 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_swap(t_stack **stack)
+void ft_swap(t_stack *stack)
 {
 	t_stack *first;
 	t_stack *second;
 
-	first = *stack;
-	second = (*stack)->next;
+	first = stack;
+	second = stack->next;
 
 	first->next = second->next;
 	first->next->prev = first;
@@ -27,57 +27,57 @@ void ft_swap(t_stack **stack)
 
 	first->prev = second;
 	second->next = first;
-	*stack = second;
+	stack = second;
 }
 
-void ft_push(t_stack **receiver, t_stack **sender)
+void ft_push(t_stack *receiver, t_stack *sender)
 {
 	t_stack *node;
 
-	if (!sender || !*sender)
+	if (!sender)
         return;
 	
-	node = *sender;
+	node = sender;
 	if (node->next == node)
-		*sender = NULL;
+		sender = NULL;
 	else
 	{
-		*sender = (*sender)->next;
-		(*sender)->prev = node->prev;
-		node->prev->next = *sender;
+		sender = sender->next;
+		sender->prev = node->prev;
+		node->prev->next = sender;
 	}
 
-	if (!*receiver)
+	if (!receiver)
 	{
-		*receiver = node;
+		receiver = node;
 		node->next = node;
 		node->prev =node;
 	}
 	else
 	{
-		node->prev = (*receiver)->prev;
-		node->next = *receiver;
-		(*receiver)->prev->next = node;
-		(*receiver)->prev = node;
-		*receiver = node;
+		node->prev = receiver->prev;
+		node->next = receiver;
+		receiver->prev->next = node;
+		receiver->prev = node;
+		receiver = node;
 	}
 }
 
-void ft_rotate(t_stack **stack, int reverse)
+void ft_rotate(t_stack *stack, int reverse)
 {
 	if (!reverse)
-		*stack = (*stack)->next;
+		stack = stack->next;
 	else
-		*stack = (*stack)->prev;
+		stack = stack->prev;
 }
 
 
 
-void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
+void ft_operation(t_stack *stack_a, t_stack *stack_b, char *op)
 {
-	if (*stack_a && op[0] == 's' && op[1] == 'a')
+	if (stack_a && op[0] == 's' && op[1] == 'a')
 		ft_swap(stack_a);
-	else if (*stack_b && op[0] == 's' && op[1] == 'b')
+	else if (stack_b && op[0] == 's' && op[1] == 'b')
 		ft_swap(stack_b);
 	else if (op[0] == 's' && op[1] == 's')
 	{
@@ -85,14 +85,14 @@ void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
 		ft_operation(stack_a, stack_b, "sb");
 	}
 
-	else if (*stack_b && op[0] == 'p' && op[1] == 'a')
+	else if (stack_b && op[0] == 'p' && op[1] == 'a')
 		ft_push(stack_a, stack_b);
-	else if (*stack_a && op[0] == 'p' && op[1] == 'b')
+	else if (stack_a && op[0] == 'p' && op[1] == 'b')
 		ft_push(stack_b, stack_a);
 
-	else if (*stack_a && op[0] == 'r' && op[1] == 'a' && !op[2])
+	else if (stack_a && op[0] == 'r' && op[1] == 'a' && !op[2])
 		ft_rotate(stack_a, 0);
-	else if (*stack_b && op[0] == 'r' && op[1] == 'b' && !op[2])
+	else if (stack_b && op[0] == 'r' && op[1] == 'b' && !op[2])
 		ft_rotate(stack_b, 0);
 	else if (op[0] == 'r' && op[1] == 'r' && !op[2])
 	{
@@ -100,9 +100,9 @@ void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
 		ft_rotate(stack_b, 0);
 	}
 
-	else if (*stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'a')
+	else if (stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'a')
 		ft_rotate(stack_a, 1);
-	else if (*stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'b')
+	else if (stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'b')
 		ft_rotate(stack_b, 1);
 	else if (op[0] == 'r' && op[1] == 'r' && op[2] == 'r')
 	{
