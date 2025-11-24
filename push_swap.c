@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:41:38 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:35:22 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:24:39 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 
 #include "push_swap.h"
 
+
+
+
+	////////////////////////function print stack
+
+void	print_s(t_stack **stack)
+	{
+		t_stack *node = *stack;
+
+		while (node)
+		{
+			printf("c: %10d\n", node->content);
+			node = node->next;
+			if (node == *stack)
+				break;
+		}
+		printf("\n");
+	}
+	
 
 
 
@@ -56,27 +75,34 @@ int	main(int argc, char **argv)
 
 	
 	//////////////////////// test stack_a && stack_b/////////////////////////// 
-	t_stack *test;
+	// t_stack *test;
+	// t_stack *test2;
 	
-	test = *stack_a;
-	printf("\n\nstack_a\n");
-	while (test)
-	{
-		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
-		test = test->next;
-		if (test == *stack_a)
-			break;
-	}
+	// test = *stack_a;
+	// test2 = *stack_b;
 
-	test = *stack_b;
-	printf("\nstack_b\n\n");
-	while (test)
-	{
-		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
-		test = test->next;
-		if (test == *stack_b)
-			break;
-	}
+	// printf("\n\nstack_a\n");
+	// while (test)
+	// {
+	// 	printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+	// 	test = test->next;
+	// 	if (test == *stack_a)
+	// 		break;
+	// }
+
+	// test = *stack_b;
+	// printf("\nstack_b\n\n");
+	// while (test)
+	// {
+	// 	printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
+	// 	test = test->next;
+	// 	if (test == *stack_b)
+	// 		break;
+	// }
+
+
+	
+
 	//////////////////////////////////////////////////////////////////////
 	
 	
@@ -88,18 +114,15 @@ int	main(int argc, char **argv)
 	int max_bit;
 
 	arg_total = ft_count_arg(stack_a);
-	printf("arg total: %d\n\n", arg_total);
-	printf("verify sorting: %d\n\n", ft_verify_sorting(stack_a));
-	
-	
+		
 	max_bit = 0;
 	while (((arg_total - 1) >> max_bit) != 0)
 		max_bit++;
 
 	pos_bit = 0;
-	while (pos_bit < max_bit)
+	while (pos_bit < max_bit - 1)
 	{
-		printf("boucle\n");
+		//printf("boucle pos bit: %d sorting: %d\n", pos_bit, ft_verify_sorting(stack_a));
 		
 		if (!ft_verify_sorting(stack_a))
 			break;
@@ -120,42 +143,27 @@ int	main(int argc, char **argv)
 				write(1, "pb\n", 3);
 			}
 			arg_in_a--;
+
+			//////
+			// printf("\n stack_a\n");
+			// print_s(stack_a);
+			// printf("\n stack_b\n");
+			// print_s(stack_b);
+			// printf("\n");
+			/////
 		}
 
 		while (*stack_b)
 		{
 			ft_operation(stack_a, stack_b, "pa");
-			printf("test %d\n", ft_count_arg(stack_b));
+			write(1, "pa\n", 3);
 		}
 		pos_bit++;
 	}
 
+	// printf("\n\n\n stack_a final\n");
+	// print_s(stack_a);
 
-	//////////////////////// test stack_a && stack_b/////////////////////////// 
-	
-	test = *stack_a;
-	printf("\n\nstack_a\n");
-	while (test)
-	{
-		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
-		test = test->next;
-		if (test == *stack_a)
-			break;
-	}
-
-	test = *stack_b;
-	printf("\nstack_b\n\n");
-	while (test)
-	{
-		printf("first node: %10p\t node: %10p\t content: %10d\t index: %10d\t next: %10p\t previous: %10p\n", *stack_a, test, test->content, test->index, test->next, test->prev);
-		test = test->next;
-		if (test == *stack_b)
-			break;
-	}
-	//////////////////////////////////////////////////////////////////////
-
-
-	
 
 
 	return (0);

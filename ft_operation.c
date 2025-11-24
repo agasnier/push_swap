@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:04:26 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:40:32 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:02:02 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void ft_rotate(t_stack **stack, int reverse)
 
 void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
 {
-	if (op[0] == 's' && op[1] == 'a' && ft_count_arg(stack_a) > 1)
+	if (*stack_a && op[0] == 's' && op[1] == 'a')
 		ft_swap(stack_a);
-	else if (op[0] == 's' && op[1] == 'b' && ft_count_arg(stack_b) > 1)
+	else if (*stack_b && op[0] == 's' && op[1] == 'b')
 		ft_swap(stack_b);
 	else if (op[0] == 's' && op[1] == 's')
 	{
@@ -85,14 +85,14 @@ void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
 		ft_operation(stack_a, stack_b, "sb");
 	}
 
-	else if (op[0] == 'p' && op[1] == 'a' && ft_count_arg(stack_b) > 1)
+	else if (*stack_b && op[0] == 'p' && op[1] == 'a')
 		ft_push(stack_a, stack_b);
-	else if (op[0] == 'p' && op[1] == 'b' && ft_count_arg(stack_a) > 1)
+	else if (*stack_a && op[0] == 'p' && op[1] == 'b')
 		ft_push(stack_b, stack_a);
 
-	else if (op[0] == 'r' && op[1] == 'r' && !op[2] && ft_count_arg(stack_a) > 1)
+	else if (*stack_a && op[0] == 'r' && op[1] == 'a' && !op[2])
 		ft_rotate(stack_a, 0);
-	else if (op[0] == 'r' && op[1] == 'b' && !op[2] && ft_count_arg(stack_b) > 1)
+	else if (*stack_b && op[0] == 'r' && op[1] == 'b' && !op[2])
 		ft_rotate(stack_b, 0);
 	else if (op[0] == 'r' && op[1] == 'r' && !op[2])
 	{
@@ -100,9 +100,9 @@ void ft_operation(t_stack **stack_a, t_stack **stack_b, char *op)
 		ft_rotate(stack_b, 0);
 	}
 
-	else if (op[0] == 'r' && op[1] == 'r' && op[2] == 'a' && ft_count_arg(stack_a) > 1)
+	else if (*stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'a')
 		ft_rotate(stack_a, 1);
-	else if (op[0] == 'r' && op[1] == 'r' && op[2] == 'b' && ft_count_arg(stack_a) > 1)
+	else if (*stack_a && op[0] == 'r' && op[1] == 'r' && op[2] == 'b')
 		ft_rotate(stack_b, 1);
 	else if (op[0] == 'r' && op[1] == 'r' && op[2] == 'r')
 	{
