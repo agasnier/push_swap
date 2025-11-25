@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:24:35 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 16:20:46 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:30:38 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 int	ft_create_end_node(t_stack **first_node, int content, int index)
 {
 	t_stack	*new_node;
-	t_stack *node;
-
+	t_stack	*node;
 
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 		return (1);
-
 	new_node->content = content;
 	new_node->index = index;
-		
-	
 	if (*first_node == NULL)
 	{
 		*first_node = new_node;
@@ -46,11 +42,11 @@ int	ft_create_end_node(t_stack **first_node, int content, int index)
 int	ft_init_stack(char **argv, t_stack **stack_a)
 {
 	int	i;
-	int j;
+	int	j;
 	int	tmp;
 
 	i = 0;
-		while (argv[i])
+	while (argv[i])
 	{
 		j = 0;
 		if (!argv[i][j])

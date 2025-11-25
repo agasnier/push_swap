@@ -6,22 +6,21 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:26:39 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 16:15:34 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:36:16 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_search_index(t_stack **stack) //ajouter verif duplicata
+void	ft_search_index(t_stack **stack)
 {
-	t_stack *node;
+	t_stack	*node;
 	t_stack	*node_tmp;
-	int count_arg;
-	int index;
-	
+	int		count_arg;
+	int		index;
+
 	index = 0;
 	count_arg = ft_count_arg(*stack);
-	
 	while (index <= count_arg)
 	{
 		node = *stack;
@@ -30,10 +29,10 @@ void	ft_search_index(t_stack **stack) //ajouter verif duplicata
 		{
 			if (node->index == -1)
 				if (node_tmp == NULL || node_tmp->content > node->content)
-					node_tmp = node;	
+					node_tmp = node;
 			node = node->next;
 			if (node == *stack)
-				break;
+				break ;
 		}
 		if (node_tmp != NULL)
 			node_tmp->index = index;
@@ -41,21 +40,39 @@ void	ft_search_index(t_stack **stack) //ajouter verif duplicata
 	}
 }
 
+int	ft_verif_dup(t_stack **stack)
+{
+	t_stack	*current;
+	t_stack	*comp;
+
+	current = *stack;
+	while (1)
+	{
+		comp = current->next;
+		while (comp != *stack)
+		{
+			if (comp->content == current->content)
+				return (-1);
+			comp = comp->next;
+		}
+		current = current->next;
+		if (current == *stack)
+			return (0);
+	}
+}
+
 int	ft_verify_sorting(t_stack **stack)
 {
-	t_stack *node;
-																																																								
+	t_stack	*node;
+
 	node = *stack;
-	
 	while (1)
 	{
 		if (node->content > node->next->content)
 			return (-1);
 		node = node->next;
 		if (node->next == *stack)
-			break;
+			break ;
 	}
 	return (0);
 }
-
-

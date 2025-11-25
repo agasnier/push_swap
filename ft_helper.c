@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/24 16:19:59 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:34:17 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_count_arg(t_stack *stack)
 {
-	t_stack *tmp;
-	int	count;
-	
+	t_stack	*tmp;
+	int		count;
+
 	if (!stack)
 		return (0);
 	tmp = stack;
@@ -26,16 +26,15 @@ int	ft_count_arg(t_stack *stack)
 		count++;
 		tmp = tmp->next;
 		if (tmp == stack)
-			break;
+			break ;
 	}
-
 	return (count);
 }
 
-int ft_atoi(char *argv, int *j, int *tmp)
+int	ft_atoi(char *argv, int *j, int *tmp)
 {
-	long number;
-	int sign;
+	long	number;
+	int		sign;
 
 	number = 0;
 	sign = 1;
@@ -59,22 +58,23 @@ int ft_atoi(char *argv, int *j, int *tmp)
 	if (number > 2147483647 || number < -2147483648)
 		return (-1);
 	*tmp = (int)number;
-
 	return (0);
 }
 
-void	ft_free_all(t_stack **stack_a, t_stack **stack_b)
+void	ft_free_all(t_stack **stack_a, t_stack **stack_b, int error)
 {
-	t_stack *tmp;
-	t_stack *head;
+	t_stack	*tmp;
+	t_stack	*head;
 
+	if (error)
+		write(2, "Error\n", 6);
 	head = *stack_a;
 	while (*stack_a)
 	{
 		tmp = (*stack_a)->next;
 		free(*stack_a);
 		if (tmp == head)
-			break;
+			break ;
 		*stack_a = tmp;
 	}
 	head = *stack_b;
@@ -83,10 +83,9 @@ void	ft_free_all(t_stack **stack_a, t_stack **stack_b)
 		tmp = (*stack_b)->next;
 		free(*stack_b);
 		if (tmp == head)
-			break;
+			break ;
 		*stack_b = tmp;
 	}
 	stack_a = NULL;
 	stack_b = NULL;
 }
-
