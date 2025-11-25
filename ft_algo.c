@@ -6,62 +6,80 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:20:00 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/25 11:43:47 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:18:18 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_algo_stack_a(t_stack **stack_a, t_stack **stack_b, int pos_bit)
+static int	ft_how_far(t_stack **stack, int index_max)
 {
-	int		arg_in_a;
-	t_stack	*node_a;
+	t_stack	*node;
+	int		i;
 
-	arg_in_a = ft_count_arg(*stack_a);
-	while (arg_in_a > 0)
+	node = *stack;
+	i = 0;
+	while (node->index != index_max)
 	{
-		node_a = *stack_a;
-		if (node_a->index & (1 << pos_bit))
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
+
+static void	ft_algo_stack_b(t_stack **stack_a, t_stack **stack_b)
+{
+	int		index_max;
+
+	index_max = ft_count_arg(*stack_b) - 1;
+	while (*stack_b)
+	{
+		if (ft_how_far(stack_b, index_max) <= (index_max / 2))
 		{
-			ft_operation(stack_a, stack_b, "ra");
-			write(1, "ra\n", 3);
+			while ((*stack_b)->index != index_max)
+			{
+				ft_operation(stack_a, stack_b, "rb");
+			}
 		}
 		else
 		{
-			ft_operation(stack_a, stack_b, "pb");
-			write(1, "pb\n", 3);
+			while ((*stack_b)->index != index_max)
+			{
+				ft_operation(stack_a, stack_b, "rrb");
+			}
 		}
-		arg_in_a--;
+		ft_operation(stack_a, stack_b, "pa");
+		index_max--;
 	}
 }
 
-static void	ft_algo_stack_b(t_stack **stack_a, t_stack **stack_b, int pos_bit)
+void static	ft_algo_stack_a(t_stack **stack_a, t_stack **stack_b)
 {
-	pos_bit = 0;
-	while (*stack_b)
+	int	count;
+	int	chunk;
+
+	count = 0;
+	chunk = 10 + ((ft_count_arg(*stack_a)) / 25);
+	while (*stack_a)
 	{
-		ft_operation(stack_a, stack_b, "pa");
-		write(1, "pa\n", 3);
+		if ((*stack_a)->index <= count)
+		{
+			ft_operation(stack_a, stack_b, "pb");
+			ft_operation(stack_a, stack_b, "rb");
+			count++;
+		}
+		else if ((*stack_a)->index <= count + chunk)
+		{
+			ft_operation(stack_a, stack_b, "pb");
+			count++;
+		}
+		else
+			ft_operation(stack_a, stack_b, "ra");
 	}
 }
 
 void	ft_algo(t_stack **stack_a, t_stack **stack_b)
 {
-	int	arg_total;
-	int	pos_bit;
-	int	max_bit;
-
-	arg_total = ft_count_arg(*stack_a);
-	max_bit = 0;
-	while (((arg_total - 1) >> max_bit) != 0)
-		max_bit++;
-	pos_bit = 0;
-	while (pos_bit < max_bit)
-	{
-		if (!ft_verify_sorting(stack_a))
-			break ;
-		ft_algo_stack_a(stack_a, stack_b, pos_bit);
-		ft_algo_stack_b(stack_a, stack_b, pos_bit);
-		pos_bit++;
-	}
+	ft_algo_stack_a(stack_a, stack_b);
+	ft_algo_stack_b(stack_a, stack_b);
 }
