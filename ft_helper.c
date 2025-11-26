@@ -6,11 +6,26 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:56:43 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:34:10 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_how_far(t_stack **stack, int index)
+{
+	t_stack	*node;
+	int		i;
+
+	node = *stack;
+	i = 0;
+	while (node->index != index)
+	{
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
 
 int	ft_count_arg(t_stack *stack)
 {
@@ -33,6 +48,8 @@ int	ft_count_arg(t_stack *stack)
 
 int	ft_arg(char *argv, int *j, int *tmp)
 {
+	while (argv[*j] == ' ')
+		(*j)++;
 	if ((argv[*j] < '0' || argv[*j] > '9') && (argv[*j] != '-'
 			&& argv[*j] != '+'))
 		return (-1);
@@ -41,10 +58,6 @@ int	ft_arg(char *argv, int *j, int *tmp)
 		return (-1);
 	if (ft_atoi(argv, j, tmp))
 		return (-1);
-	if (argv[*j] == ' ' && !argv[(*j) + 1])
-		return (-1);
-	if (argv[*j] == ' ')
-		(*j)++;
 	return (0);
 }
 

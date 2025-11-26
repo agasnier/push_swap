@@ -6,13 +6,13 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:24:35 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:16:59 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:03:41 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_create_end_node(t_stack **first_node, int content, int index)
+static int	ft_create_end_node(t_stack **first_node, int content, int index)
 {
 	t_stack	*new_node;
 	t_stack	*node;

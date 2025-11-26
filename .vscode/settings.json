@@ -3,6 +3,7 @@
 		"chrono": "c",
 		"ranges": "c",
 		"variant": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"stdio.h": "c"
 	}
 }

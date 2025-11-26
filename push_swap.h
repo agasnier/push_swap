@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:16:44 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:10:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:03:50 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		main(int argc, char **argv);
 void	ft_algo(t_stack **stack_a, t_stack **stack_b);
 
 //ft_initialization.c
-int		ft_create_end_node(t_stack **first_node, int content, int index);
 int		ft_init_stack(char **argv, t_stack **stack_a);
 
 //ft_verification.c
@@ -41,6 +40,7 @@ int		ft_verif_dup(t_stack **stack);
 int		ft_verify_sorting(t_stack **stack);
 
 //ft_helper.c
+int		ft_how_far(t_stack **stack, int index);
 int		ft_arg(char *argv, int *j, int *tmp);
 int		ft_atoi(char *argv, int *j, int *tmp);
 int		ft_count_arg(t_stack *stack);
