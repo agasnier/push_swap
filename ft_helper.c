@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/25 17:27:02 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:56:43 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ int	ft_count_arg(t_stack *stack)
 	return (count);
 }
 
+int	ft_arg(char *argv, int *j, int *tmp)
+{
+	if ((argv[*j] < '0' || argv[*j] > '9') && (argv[*j] != '-'
+			&& argv[*j] != '+'))
+		return (-1);
+	if ((*j) > 0 && ((argv[*j] == '-' || argv[*j] == '+')
+			&& argv[(*j) - 1] != ' '))
+		return (-1);
+	if (ft_atoi(argv, j, tmp))
+		return (-1);
+	if (argv[*j] == ' ' && !argv[(*j) + 1])
+		return (-1);
+	if (argv[*j] == ' ')
+		(*j)++;
+	return (0);
+}
+
 int	ft_atoi(char *argv, int *j, int *tmp)
 {
 	long	number;
@@ -38,8 +55,6 @@ int	ft_atoi(char *argv, int *j, int *tmp)
 
 	number = 0;
 	sign = 1;
-	if (!argv[*j])
-		return (-1);
 	if (argv[*j] == '-' || argv[*j] == '+')
 	{
 		if (argv[*j] == '-')
@@ -52,8 +67,6 @@ int	ft_atoi(char *argv, int *j, int *tmp)
 		number += argv[*j] - '0';
 		(*j)++;
 	}
-	if (argv[*j] != '\0' && argv[*j] != ' ')
-		return (-1);
 	number *= sign;
 	if (number > 2147483647 || number < -2147483648)
 		return (-1);

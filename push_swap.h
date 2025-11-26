@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:16:44 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/25 11:29:45 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:10:56 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_verif_dup(t_stack **stack);
 int		ft_verify_sorting(t_stack **stack);
 
 //ft_helper.c
+int		ft_arg(char *argv, int *j, int *tmp);
 int		ft_atoi(char *argv, int *j, int *tmp);
 int		ft_count_arg(t_stack *stack);
 void	ft_free_all(t_stack **stack_a, t_stack **stack_b, int error);

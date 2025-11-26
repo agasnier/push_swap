@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:24:35 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/25 11:30:38 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:16:59 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_init_stack(char **argv, t_stack **stack_a)
 {
 	int	i;
 	int	j;
-	int	tmp;
+	int	content;
 
 	i = 0;
 	while (argv[i])
@@ -53,11 +53,9 @@ int	ft_init_stack(char **argv, t_stack **stack_a)
 			return (-1);
 		while (argv[i][j])
 		{
-			if (argv[i][j] == ' ')
-				j++;
-			if (ft_atoi(argv[i], &j, &tmp))
+			if (ft_arg(argv[i], &j, &content))
 				return (-1);
-			if (ft_create_end_node(stack_a, tmp, -1))
+			if (ft_create_end_node(stack_a, content, -1))
 				return (-1);
 		}
 		i++;
