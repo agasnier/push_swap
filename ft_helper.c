@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:25:40 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/26 13:34:10 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/11/27 09:58:50 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ int	ft_arg(char *argv, int *j, int *tmp)
 {
 	while (argv[*j] == ' ')
 		(*j)++;
-	if ((argv[*j] < '0' || argv[*j] > '9') && (argv[*j] != '-'
-			&& argv[*j] != '+'))
-		return (-1);
-	if ((*j) > 0 && ((argv[*j] == '-' || argv[*j] == '+')
-			&& argv[(*j) - 1] != ' '))
-		return (-1);
 	if (ft_atoi(argv, j, tmp))
 		return (-1);
+	if (argv[*j] != ' ' && argv[*j] != '\0')
+		return (-1);
+	while (argv[*j] == ' ')
+		(*j)++;
 	return (0);
 }
 
@@ -74,6 +72,8 @@ int	ft_atoi(char *argv, int *j, int *tmp)
 			sign = -1;
 		(*j)++;
 	}
+	if (!(argv[*j] >= '0' && argv[*j] <= '9'))
+		return (-1);
 	while (argv[*j] >= '0' && argv[*j] <= '9')
 	{
 		number *= 10;
