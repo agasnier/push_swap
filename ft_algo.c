@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 11:20:00 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/26 13:16:20 by algasnie         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:33:20 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_algo_stack_a(t_stack **stack_a, t_stack **stack_b)
 	int	chunk;
 
 	count = 0;
-	chunk = 10 + ((ft_count_arg(*stack_a)) / 25);
+	chunk = 10 + (ft_count_arg(*stack_a) / 25);
 	while (*stack_a)
 	{
 		if ((*stack_a)->index <= count)

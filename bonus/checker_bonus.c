@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/04 16:05:08 by algasnie          #+#    #+#             */
+/*   Updated: 2025/12/04 16:54:54 by algasnie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap_bonus.h"
+
+int	main(int argc, char **argv)
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	if (argc <= 1)
+		return (0);
+	stack_a = NULL;
+	stack_b = NULL;
+	if (ft_init_stack(&argv[1], &stack_a))
+	{
+		ft_free_all(&stack_a, &stack_b, 1); //////verifier si retourne error
+		return (1);
+	}
+	if (ft_verif_dup(&stack_a)) //////////////////verfiier si retourn error
+	{
+		ft_free_all(&stack_a, &stack_b, 1);
+		return (1);
+	}
+	//ft_search_index(&stack_a);
+	//ft_algo(&stack_a, &stack_b);
+
+	///
+
+	int fd;
+	char *line;
+	
+	fd = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || line[0] != 'r')
+		{
+			break ;
+		}
+		printf("%s\n", line);
+
+	}
+
+
+	
+	ft_free_all(&stack_a, &stack_b, 0);
+	return (0);
+}
